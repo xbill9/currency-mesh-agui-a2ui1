@@ -6,3 +6,4 @@ node_modules/
 *.jsonl.tmp
 .env
 build/
+infra/mesh.*.env
