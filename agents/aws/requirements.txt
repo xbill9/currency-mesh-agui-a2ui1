@@ -1,0 +1,11 @@
+# The mesh layer: A2A server and client (a2a-sdk 0.3 types, which a2ui-a2a 0.3 builds on).
+a2a-sdk[http-server] >= 0.3.26, < 0.4
+a2ui-a2a == 0.3.0
+a2ui-agent-sdk == 0.11.0
+a2ui-core == 0.6.0
+fastmcp >= 4.1.8, < 5.0.0
+mcp >= 2.3.0, < 2.4.0
+httpx >= 0.28.1
+uvicorn >= 0.34.3, < 1.0.0
+strands-agents >= 1.64.0, < 2.0.0
+botocore[crt] ~= 1.43.0

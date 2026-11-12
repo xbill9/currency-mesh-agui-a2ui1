@@ -1,0 +1,6 @@
+node_modules/
+frontend-react/
+logs/
+__pycache__/
+evidence/
+.git/

@@ -7,9 +7,12 @@ import {
 } from "@copilotkit/runtime/v2";
 import { HttpAgent } from "@ag-ui/client";
 
-// AGENT_URL points at the mesh coordinator's AG-UI endpoint: running locally
-// (python3 coordinator/main.py, PORT=8110), or its Cloud Run service.
-const agentUrl = process.env.AGENT_URL || "http://127.0.0.1:8110/";
+// With COORDINATOR_URL set (Cloud Run), runs go through /api/coordinator,
+// which adds a Google ID token. Otherwise AGENT_URL points at the coordinator
+// running locally (python3 coordinator/main.py, PORT=8110).
+const agentUrl = process.env.COORDINATOR_URL
+  ? `http://127.0.0.1:${process.env.PORT || "3000"}/api/coordinator`
+  : process.env.AGENT_URL || "http://127.0.0.1:8110/";
 
 const runtime = new CopilotRuntime({
   agents: {

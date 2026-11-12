@@ -1,0 +1,5 @@
+# Build one image from a Dockerfile anywhere in the context and push it.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-t", "${_IMAGE}", "-f", "${_DOCKERFILE}", "."]
+images: ["${_IMAGE}"]

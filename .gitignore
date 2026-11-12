@@ -5,3 +5,4 @@ node_modules/
 .next/
 *.jsonl.tmp
 .env
+build/

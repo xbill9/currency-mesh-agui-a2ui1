@@ -1,0 +1,21 @@
+{
+  "name": "currencymesh",
+  "version": 2,
+  "managedBy": "CDK",
+  "runtimes": [
+    {
+      "name": "currency_mesh_aws",
+      "build": "CodeZip",
+      "modelProvider": "Bedrock",
+      "entrypoint": "main.py",
+      "codeLocation": "build/aws",
+      "runtimeVersion": "PYTHON_3_14",
+      "protocol": "A2A",
+      "envVars": [
+        { "name": "BEDROCK_MODEL_ID", "value": "us.amazon.nova-2-lite-v1:0" },
+        { "name": "PORT", "value": "9000" }
+      ]
+    }
+  ],
+  "memories": []
+}
