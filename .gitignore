@@ -7,3 +7,9 @@ node_modules/
 .env
 build/
 infra/mesh.*.env
+
+# AgentCore CLI state and per-account targets (written by deploy_aws.sh)
+agentcore/.cli/
+agentcore/.cache/
+agentcore/cdk/cdk.out/
+agentcore/aws-targets.json
