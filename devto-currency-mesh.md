@@ -373,5 +373,5 @@ The strategy for joining generative UI agents across Google Cloud, AWS and Azure
 - CopilotKit: https://github.com/CopilotKit/CopilotKit
 - Google Agent Development Kit: https://github.com/google/adk-python
 - Strands Agents: https://strandsagents.com
-- Microsoft Agent Framework: https://github.com/microsoft/agent-framework
+- Microsoft Agent Framework: https://pypi.org/project/agent-framework/
 - Frankfurter API: https://www.frankfurter.dev
