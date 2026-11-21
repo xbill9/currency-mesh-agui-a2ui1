@@ -17,6 +17,10 @@ Use the active `python3`; never create a virtualenv. Gemini key: `~/gemini.key`.
 | Offline tests | `python3 -m pytest tests` |
 | Render suite (stack up) | `UI_URL=http://localhost:3010 python3 tools/render_suite.py 10 LABEL evidence/OUT.jsonl` |
 | Routing suite (stack up) | `UI_URL=http://localhost:3010 python3 tools/mesh_suite.py 10 LABEL evidence/OUT.jsonl` |
+| Suite tables | `python3 tools/summarize_suite.py evidence/OUT.jsonl` |
+| Diff agents against siblings | `python3 tools/compare_siblings.py` |
+| Demo video (stack up) | `GEMINI_API_KEY=$(cat ~/gemini.key) UI_URL=http://localhost:3010 python3 tools/record_demo.py evidence/OUT.jsonl` |
+| Article cover | `python3 tools/make_cover.py .` |
 
 Sibling ports 3000-3002, 8008, 8080, 8090, 8095, 10000 may be in use. Stop processes by port (`fuser -k 10130/tcp`), never with `pkill -f`: the pattern matches the shell running it.
 

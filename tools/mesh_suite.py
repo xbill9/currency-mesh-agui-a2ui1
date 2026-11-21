@@ -37,8 +37,12 @@ def verdict(case, r: dict) -> str:
     _prompt, tool, job, clouds, text_ok = case
     if "<a2ui" in r.get("text", ""):
         return "fail: raw <a2ui> text in the chat"
-    if r.get("errors"):
-        return "fail: " + "; ".join(e[:80] for e in r["errors"])
+    errors = r.get("errors") or []
+    if text_ok and r.get("text"):
+        # A text-only tool result is an allowed answer here, once the text reached the chat.
+        errors = [e for e in errors if not e.startswith("tool result:")]
+    if errors:
+        return "fail: " + "; ".join(e[:80] for e in errors)
     called = r.get("tools") or []
     if tool is None:
         return "pass" if not called and r.get("text") else f"fail: called {called}"

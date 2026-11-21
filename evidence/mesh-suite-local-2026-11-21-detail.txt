@@ -1,0 +1,9 @@
+XYZ: card 8 text only 2
+XYZ gcp agent seconds median 27.3 min 7.5 max 48.2
+aws 20 median 0.9
+azure 20 median 1.5
+gcp 20 median 7.5
+slowest:gcp 20 
+gcp agent seconds excluding XYZ: n 40 median 7.4 max 22.1
+gcp calls with A2UI: 48 of 50
+XYZ answered in text only: 2 of 10

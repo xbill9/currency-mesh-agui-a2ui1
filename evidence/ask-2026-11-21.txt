@@ -1,0 +1,5 @@
+# tools/ask.py against the local agents, 2026-11-21, output verbatim
+$ python3 tools/ask.py azure=http://127.0.0.1:10130/ -- "Compare 1 USD in EUR, GBP, JPY and CAD"
+{"cloud": "azure", "seconds": 6.97, "metadata": {"cloud": "azure", "framework": "Microsoft Agent Framework", "model": "gpt-5.4-mini", "seconds": 6.89, "a2ui_messages": 1}, "text": "", "a2ui_messages": 1, "components": ["Text", "Text", "Text", "Text", "Text", "BarChart", "Text", "Column", "Card"], "error": null}
+$ python3 tools/ask.py aws=http://127.0.0.1:10120/ -- "Show me the USD to JPY trend over the last 90 days"
+{"cloud": "aws", "seconds": 2.09, "metadata": {"cloud": "aws", "framework": "Strands Agents", "model": "us.amazon.nova-2-lite-v1:0", "seconds": 2.03, "a2ui_messages": 1}, "text": "", "a2ui_messages": 1, "components": ["Text", "LineChart", "Text", "Column", "Card"], "error": null}

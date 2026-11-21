@@ -13,3 +13,5 @@ agentcore/.cli/
 agentcore/.cache/
 agentcore/cdk/cdk.out/
 agentcore/aws-targets.json
+media/raw/
+media/voice/

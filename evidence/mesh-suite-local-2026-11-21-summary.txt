@@ -1,0 +1,18 @@
+local-2026-11-21: 100 of 100 passed
+
+| Prompt | Tool, job sent | Clouds | Passed | Turn median s |
+| How much is 250 USD in EUR? | route_to_cloud rate x10 | gcp | 10 of 10 | 10.1 |
+| What's a thousand euros in dollars? | route_to_cloud rate x10 | gcp | 10 of 10 | 9.9 |
+| Show me the USD to JPY trend over the last 90 days | route_to_cloud history x10 | aws | 10 of 10 | 4.1 |
+| Show me EUR to USD for the past 6 months and the current rate | route_to_cloud history x10 | aws | 10 of 10 | 5.0 |
+| Compare the euro, pound and Swiss franc against the dollar in a bar chart | route_to_cloud comparison x10 | azure | 10 of 10 | 5.2 |
+| Compare 1 USD in EUR, GBP, JPY and CAD | route_to_cloud comparison x10 | azure | 10 of 10 | 4.7 |
+| Ask all three clouds: how much is 100 USD in EUR? | ask_all_clouds x10 | aws+azure+gcp | 10 of 10 | 10.2 |
+| Compare the clouds: show me the USD to JPY trend over the last 90 days | ask_all_clouds x10 | aws+azure+gcp | 10 of 10 | 10.6 |
+| What's the weather in Paris? | none x10 | - | 10 of 10 | 2.4 |
+| Convert 100 USD to XYZ | route_to_cloud rate x10 | gcp | 10 of 10 | 30.9 |
+
+| Cloud | Model | Calls | With A2UI | Agent median s | Agent max s |
+| aws | us.amazon.nova-2-lite-v1:0 | 40 | 40 | 0.9 | 1.9 |
+| azure | gpt-5.4-mini | 40 | 40 | 1.6 | 2.0 |
+| gcp | gemini-3.8-flash | 50 | 48 | 7.6 | 48.2 |

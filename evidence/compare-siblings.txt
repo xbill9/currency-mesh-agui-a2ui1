@@ -1,0 +1,26 @@
+== gcp: agents/gcp/currency_agent vs currency-claude-agui-a2ui1@294caee
+currency_agent/__init__.py: 91 lines, 0 changed
+currency_agent/a2ui_rescue.py: 118 lines, 0 changed
+currency_agent/agent.py: 176 lines, 65 changed
+currency_agent/custom_catalog.json: 95 lines, 0 changed
+currency_agent/macros.py: 181 lines, 0 changed
+currency_agent/test_client.py: 154 lines, 154 changed (absent here)
+total changed lines: 219
+== aws: agents/aws/currency_agent vs currency-strands-agui-a2ui1@802cb1c
+app/agent/currency_agent/__init__.py: 0 lines, 0 changed
+app/agent/currency_agent/a2ui_rescue.py: 122 lines, 0 changed
+app/agent/currency_agent/agent.py: 165 lines, 2 changed
+    +from mesh.sink import record
+    +    record(wire)  # mesh: hand the validated A2UI to the A2A executor
+app/agent/currency_agent/custom_catalog.json: 95 lines, 0 changed
+app/agent/currency_agent/macros.py: 181 lines, 0 changed
+total changed lines: 2
+== azure: agents/azure/currency_agent vs currency-maf-agui-a2ui1@fd2268b
+app/agent/currency_agent/__init__.py: 0 lines, 0 changed
+app/agent/currency_agent/a2ui_rescue.py: 122 lines, 0 changed
+app/agent/currency_agent/agent.py: 204 lines, 2 changed
+    +from mesh.sink import record
+    +    record(wire)  # mesh: hand the validated A2UI to the A2A executor
+app/agent/currency_agent/custom_catalog.json: 95 lines, 0 changed
+app/agent/currency_agent/macros.py: 181 lines, 0 changed
+total changed lines: 2
