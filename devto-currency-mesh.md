@@ -253,11 +253,11 @@ local-2026-11-21: 100 of 100 passed
 
 Each agent call inside those turns, as timed by the agent's A2A server:
 
-| Cloud | Model | Calls | With A2UI | Agent median s | Agent max s |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| aws | us.amazon.nova-2-lite-v1:0 | 40 | 40 | 0.9 | 1.9 |
-| azure | gpt-5.4-mini | 40 | 40 | 1.6 | 2.0 |
-| gcp | gemini-3.8-flash | 50 | 48 | 7.6 | 48.2 |
+| Cloud | Model | Calls with A2UI | Agent median s | Agent max s |
+| :--- | :--- | :--- | :--- | :--- |
+| aws | us.amazon.nova-2-lite-v1:0 | 40 of 40 | 0.9 | 1.9 |
+| azure | gpt-5.4-mini | 40 of 40 | 1.6 | 2.0 |
+| gcp | gemini-3.8-flash | 48 of 50 | 7.6 | 48.2 |
 
 The coordinator sent the expected job in all 100 turns: `rate` 30 times, `history` 20, `comparison` 20, `ask_all_clouds` 20 times, and no tool for the weather question.
 
