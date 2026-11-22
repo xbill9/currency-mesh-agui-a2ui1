@@ -1,2 +1,6 @@
-devto = PENDING
+devto-gde = https://dev.to/gde/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure-2j83
+devto-aws = https://dev.to/aws-builders/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure-227e
+builder = PENDING
+medium = SKIP
+substack = PENDING
 repo = https://github.com/xbill9/currency-mesh-agui-a2ui1

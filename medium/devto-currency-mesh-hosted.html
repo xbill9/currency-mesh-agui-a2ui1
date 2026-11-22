@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>One Chat, Three Clouds: An A2UI 1.0 Agent Mesh Over A2A on Google Cloud, AWS and Azure</title>
+  <meta name="description" content="Three A2UI 1.0 currency agents, one per cloud, joined over A2A behind one AG-UI coordinator. Google ADK and Gemini, Strands and Amazon Nova, Microsoft Agent Framework and Azure OpenAI answer in the same chat, one at a time or all three at once." />
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+    body{font-family:-apple-system,'Segoe UI',Roboto,'Liberation Sans',Arial,sans-serif;
+         font-size:18px;line-height:1.58;max-width:42em;color:#242424;}
+    h1,h2,h3,h4{font-weight:700;line-height:1.25;margin-top:1.8em;}
+    h4{font-size:1.25em;}
+    img{max-width:100%;height:auto;display:block;margin:1.6em 0;}
+    pre{background:#f7f7f7;border:1px solid #e6e6e6;border-radius:4px;
+        padding:12px 14px;overflow-x:auto;font-size:14px;line-height:1.45;}
+    code{font-family:'Liberation Mono',Menlo,Consolas,monospace;}
+    :not(pre)>code{background:#f2f2f2;padding:1px 5px;border-radius:3px;font-size:.9em;}
+    blockquote{border-left:3px solid #ddd;margin-left:0;padding-left:1em;color:#555;}
+    hr{border:0;border-top:1px solid #e6e6e6;margin:2.4em 0;}
+  </style>
+</head>
+<body>
+<p>This article provides a step by step guide to a cross-cloud
+generative UI mesh. Three A2UI 1.0 currency agents run at once, one each
+on Google Cloud, AWS and Azure, and an AG-UI coordinator sends every
+chat question over A2A to one of them or to all three. Every answer
+comes back as A2UI cards and charts, labelled with the cloud, framework
+and model that built it.</p>
+<figure><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-cover.d72a23ed.jpg" alt="One Chat, Three Clouds: An A2UI 1.0 Agent Mesh Over A2A on Google Cloud, AWS and Azure" /></figure>
+<p><a
+href="https://github.com/xbill9/currency-mesh-agui-a2ui1">https://github.com/xbill9/currency-mesh-agui-a2ui1</a></p>
+<p><strong>The three agents joined the mesh with two added lines
+each.</strong> Each agent is the one from its single-cloud repository.
+One shared A2A server runs all three frameworks, and each agent's UI
+tool hands its validated A2UI to that server with one
+<code>record(wire)</code> call. The coordinator model names a job and a
+table in code picks the cloud. In a ten-prompt routing suite run ten
+times through the chat UI, <strong>100 of 100 turns reached the right
+clouds with the right job</strong>, and every agent call that should
+return A2UI did.</p>
+<p>Demo video: <a
+href="https://www.youtube.com/watch?v=PtLc5apk8AU">https://www.youtube.com/watch?v=PtLc5apk8AU</a></p>
+<hr />
+<h4 id="what-was-built">What Was Built?</h4>
+<p><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-currency-mesh-table-1.png"
+alt="Table: Role, Cloud, Framework, Model, Hosting" /></p>
+<p>A question travels in four hops:</p>
+<ol type="1">
+<li>The browser sends the question to the UI over AG-UI, and the UI
+forwards it to the coordinator.</li>
+<li>The coordinator model calls one of two tools.
+<code>route_to_cloud(job, question)</code> names a job:
+<code>rate</code>, <code>history</code> or <code>comparison</code>.
+<code>ask_all_clouds(question)</code> sends the question to all three
+agents.</li>
+<li>Each agent answers with one A2A message: its reply text as a
+TextPart, and every A2UI message its UI tool validated as a DataPart
+with MIME type <code>application/a2ui+json</code>. The message metadata
+names the cloud, framework and model.</li>
+<li>The coordinator gives each surface a per-cloud id and returns the
+A2UI as its tool result. The UI renders one labelled block per
+cloud.</li>
+</ol>
+<p>The three single-cloud agents this mesh is built from:</p>
+<ul>
+<li>Google Cloud: <a
+href="https://github.com/xbill9/currency-claude-agui-a2ui1">https://github.com/xbill9/currency-claude-agui-a2ui1</a></li>
+<li>AWS: <a
+href="https://github.com/xbill9/currency-strands-agui-a2ui1">https://github.com/xbill9/currency-strands-agui-a2ui1</a></li>
+<li>Azure: <a
+href="https://github.com/xbill9/currency-maf-agui-a2ui1">https://github.com/xbill9/currency-maf-agui-a2ui1</a></li>
+</ul>
+<hr />
+<h4 id="at-this-point-you-should-have">At This Point You Should
+Have…</h4>
+<ul>
+<li>Python 3.14 and Node.js 24</li>
+<li>A Gemini API key, for the Google Cloud agent and the
+coordinator</li>
+<li>An AWS account with Amazon Nova 2 Lite enabled in Bedrock, signed in
+with <code>aws login</code></li>
+<li>An Azure subscription with a <code>gpt-5.4-mini</code> deployment in
+Azure OpenAI, signed in with <code>az login</code></li>
+</ul>
+<p>The library versions, read from the machine that ran the tests
+(<code>evidence/versions.txt</code>):</p>
+<p><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-currency-mesh-table-2.png"
+alt="Table: Component, Version" /></p>
+<hr />
+<h4 id="step-1--one-a2a-server-for-three-frameworks">Step 1 — One A2A
+Server for Three Frameworks</h4>
+<p><code>mesh/server.py</code> serves every agent. It takes one function
+from each, <code>run(prompt) -&gt; reply text</code>, and wraps it in an
+a2a-sdk <code>AgentExecutor</code>:</p>
+<pre class="python"><code>async def execute(self, context: RequestContext, event_queue: EventQueue) -&gt; None:
+    prompt = context.get_user_input()
+    with capture() as wire:
+        text = await self._run(prompt)
+    parts = [Part(root=TextPart(text=text.strip()))] if text.strip() else []
+    parts.extend(create_a2ui_parts(wire))
+    message = new_agent_parts_message(parts, context_id=context.context_id, task_id=context.task_id)
+    message.metadata = {**self._provenance, &quot;a2ui_messages&quot;: len(wire)}
+    await event_queue.enqueue_event(message)</code></pre>
+<p><code>create_a2ui_parts</code> comes from <code>a2ui-a2a</code>, the
+A2UI SDK's A2A package, and turns each validated A2UI message into a
+DataPart. The agent card advertises the A2UI 1.0 extension with the two
+catalogs the agents use: the Basic catalog and the currency charts
+catalog.</p>
+<p>Each agent's <code>main.py</code> is the <code>run</code> function
+plus its card. On Azure, <code>run</code> streams, because the agent's
+reply-text rescue middleware rewrites streamed responses only:</p>
+<pre class="python"><code>async def run(prompt: str) -&gt; str:
+    text = &quot;&quot;
+    async for update in agent.run(prompt, stream=True):
+        text += update.text or &quot;&quot;
+    return text</code></pre>
+<p>On AWS, one Strands <code>Agent</code> keeps its conversation in
+<code>agent.messages</code>, so requests take turns and each starts from
+an empty conversation:</p>
+<pre class="python"><code>async def run(prompt: str) -&gt; str:
+    async with _lock:
+        agent.messages.clear()
+        result = await agent.invoke_async(prompt)
+        return str(result)</code></pre>
+<hr />
+<h4 id="step-2--two-lines-per-agent">Step 2 — Two Lines per Agent</h4>
+<p>The A2UI an agent sends is already validated inside its UI tool,
+<code>send_a2ui_json_to_client</code>: the tool compiles the model's
+A2UI, expands the server-side macros and validates the result against
+the catalogs. The mesh needs that validated list in the A2A response.
+<code>mesh/sink.py</code> carries it there with a
+<code>ContextVar</code>, so concurrent requests stay apart and every
+task the framework starts sees the same list:</p>
+<pre class="python"><code>def record(wire: list[dict]) -&gt; None:
+    sink = _sink.get()
+    if sink is not None:
+        sink.extend(wire)</code></pre>
+<p><code>tools/compare_siblings.py</code> diffs each agent's
+<code>currency_agent/</code> package against its single-cloud repository
+at git <code>HEAD</code>:</p>
+<pre class="shell"><code>python3 tools/compare_siblings.py
+== aws: agents/aws/currency_agent vs currency-strands-agui-a2ui1@802cb1c
+app/agent/currency_agent/a2ui_rescue.py: 122 lines, 0 changed
+app/agent/currency_agent/agent.py: 165 lines, 2 changed
+    +from mesh.sink import record
+    +    record(wire)  # mesh: hand the validated A2UI to the A2A executor
+app/agent/currency_agent/custom_catalog.json: 95 lines, 0 changed
+app/agent/currency_agent/macros.py: 181 lines, 0 changed
+total changed lines: 2
+== azure: agents/azure/currency_agent vs currency-maf-agui-a2ui1@fd2268b
+app/agent/currency_agent/a2ui_rescue.py: 122 lines, 0 changed
+app/agent/currency_agent/agent.py: 204 lines, 2 changed
+    +from mesh.sink import record
+    +    record(wire)  # mesh: hand the validated A2UI to the A2A executor
+app/agent/currency_agent/custom_catalog.json: 95 lines, 0 changed
+app/agent/currency_agent/macros.py: 181 lines, 0 changed
+total changed lines: 2
+== gcp: agents/gcp/currency_agent vs currency-claude-agui-a2ui1@294caee
+currency_agent/a2ui_rescue.py: 118 lines, 0 changed
+currency_agent/agent.py: 176 lines, 65 changed
+currency_agent/custom_catalog.json: 95 lines, 0 changed
+currency_agent/macros.py: 181 lines, 0 changed
+currency_agent/test_client.py: 154 lines, 154 changed (absent here)
+total changed lines: 219</code></pre>
+<p>The AWS and Azure agents changed by the two <code>record</code>
+lines. The Google Cloud agent changed by 65 lines in
+<code>agent.py</code>: its single-cloud repository served A2A from
+inside that file with ADK's <code>to_a2a</code> and a streaming patch on
+the card builder, and reached its MCP server over HTTP. The mesh removes
+that server in favour of the shared one and starts the MCP server as a
+stdio child, as the AWS and Azure agents do. The catalog, the macros and
+the reply-text rescue are unchanged in all three.</p>
+<hr />
+<h4 id="step-3--code-picks-the-cloud">Step 3 — Code Picks the Cloud</h4>
+<p>The coordinator is an ADK <code>LlmAgent</code> on
+<code>gemini-3.8-flash</code> with two tools. The model chooses a job; a
+dictionary chooses the cloud:</p>
+<pre class="python"><code>JOB_OWNER = {&quot;rate&quot;: &quot;gcp&quot;, &quot;history&quot;: &quot;aws&quot;, &quot;comparison&quot;: &quot;azure&quot;}
+ 
+async def route_to_cloud(job: str, question: str, tool_context: ToolContext) -&gt; dict:
+    cloud = JOB_OWNER.get(job.strip().lower())
+    if cloud is None:
+        return {&quot;error&quot;: f&quot;unknown job {job!r}; use one of {sorted(JOB_OWNER)}&quot;}
+    return _result([await _ask(cloud, question)], tool_context, job)
+ 
+async def ask_all_clouds(question: str, tool_context: ToolContext) -&gt; dict:
+    pairs = await asyncio.gather(*(_ask(c, question) for c in CLOUDS))
+    return _result(list(pairs), tool_context, None)</code></pre>
+<p>Moving a job to another cloud is a one-word change in
+<code>JOB_OWNER</code>, with no prompt to retune. The model's
+instruction describes the three jobs in terms of the question: a rate or
+a conversion, a trend over time, several currencies against one.</p>
+<p>When an agent returns A2UI, <code>_result</code> sets
+<code>skip_summarization</code>, so the cards end the turn. When an
+agent returns text only, the text goes back to the coordinator model,
+which relays it in a sentence or two.</p>
+<hr />
+<h4 id="step-4--three-answers-in-one-turn">Step 4 — Three Answers in One
+Turn</h4>
+<p>Each agent names its surface <code>main</code>. Three
+<code>main</code> surfaces in one turn would collide in the renderer, so
+the coordinator prefixes every surface id with the cloud and a short
+random tag:</p>
+<pre class="python"><code>def _rename_surfaces(messages: list[dict], cloud: str) -&gt; list[dict]:
+    tag = f&quot;{cloud}-{uuid.uuid4().hex[:6]}&quot;
+    out = []
+    for m in messages:
+        m = dict(m)
+        for key, body in m.items():
+            if isinstance(body, dict) and &quot;surfaceId&quot; in body:
+                m[key] = {**body, &quot;surfaceId&quot;: f&quot;{tag}-{body[&#39;surfaceId&#39;]}&quot;}
+        out.append(m)
+    return out</code></pre>
+<p>The tool result carries one <code>sources</code> entry per cloud,
+with its framework, model, seconds and A2UI. In the browser,
+<code>MeshSources.tsx</code> renders each entry under a label such as
+<code>AWS · Strands Agents · us.amazon.nova-2-lite-v1:0 · 2.0 s</code>,
+read from the agent's own A2A metadata.</p>
+<hr />
+<h4 id="step-5--run-it-locally">Step 5 — Run It Locally</h4>
+<p>Five processes, each in its own terminal:</p>
+<pre class="shell"><code>cd agents/gcp &amp;&amp; GOOGLE_API_KEY=$(cat ~/gemini.key) PORT=10110 python3 main.py
+cd agents/aws &amp;&amp; PORT=10120 python3 main.py
+cd agents/azure &amp;&amp; AZURE_OPENAI_ENDPOINT=https://&lt;account&gt;.cognitiveservices.azure.com/ PORT=10130 python3 main.py
+GOOGLE_API_KEY=$(cat ~/gemini.key) python3 coordinator/main.py
+cd frontend-react &amp;&amp; PORT=3010 AGENT_URL=http://127.0.0.1:8110/ npx next dev --webpack -p 3010</code></pre>
+<p><code>tools/ask.py</code> sends one question to one agent over A2A,
+with no coordinator, and prints what came back:</p>
+<pre class="shell"><code>python3 tools/ask.py azure=http://127.0.0.1:10130/ -- &quot;Compare 1 USD in EUR, GBP, JPY and CAD&quot;
+{&quot;cloud&quot;: &quot;azure&quot;, &quot;seconds&quot;: 6.97, &quot;metadata&quot;: {&quot;cloud&quot;: &quot;azure&quot;, &quot;framework&quot;: &quot;Microsoft Agent Framework&quot;, &quot;model&quot;: &quot;gpt-5.4-mini&quot;, &quot;seconds&quot;: 6.89, &quot;a2ui_messages&quot;: 1}, &quot;text&quot;: &quot;&quot;, &quot;a2ui_messages&quot;: 1, &quot;components&quot;: [&quot;Text&quot;, &quot;Text&quot;, &quot;Text&quot;, &quot;Text&quot;, &quot;Text&quot;, &quot;BarChart&quot;, &quot;Text&quot;, &quot;Column&quot;, &quot;Card&quot;], &quot;error&quot;: null}
+python3 tools/ask.py aws=http://127.0.0.1:10120/ -- &quot;Show me the USD to JPY trend over the last 90 days&quot;
+{&quot;cloud&quot;: &quot;aws&quot;, &quot;seconds&quot;: 2.09, &quot;metadata&quot;: {&quot;cloud&quot;: &quot;aws&quot;, &quot;framework&quot;: &quot;Strands Agents&quot;, &quot;model&quot;: &quot;us.amazon.nova-2-lite-v1:0&quot;, &quot;seconds&quot;: 2.03, &quot;a2ui_messages&quot;: 1}, &quot;text&quot;: &quot;&quot;, &quot;a2ui_messages&quot;: 1, &quot;components&quot;: [&quot;Text&quot;, &quot;LineChart&quot;, &quot;Text&quot;, &quot;Column&quot;, &quot;Card&quot;], &quot;error&quot;: null}</code></pre>
+<p>Open http://localhost:3010 and ask for a rate, a trend, a comparison,
+or ask all three clouds.</p>
+<hr />
+<h4 id="step-6--the-routing-suite">Step 6 — The Routing Suite</h4>
+<p><code>tools/mesh_suite.py</code> sends ten prompts through the UI's
+CopilotKit endpoint, ten times each, and reads the AG-UI event stream. A
+prompt passes when the coordinator called the expected tool with the
+expected job, exactly the expected clouds answered, each of them
+answered with A2UI, and no raw <code>&lt;a2ui</code> text reached the
+chat. Two prompts accept text: the weather question, which the
+coordinator declines, and an unknown currency code.</p>
+<pre class="shell"><code>UI_URL=http://localhost:3010 python3 tools/mesh_suite.py 10 local-2026-11-21 evidence/mesh-suite-local-2026-11-21.jsonl
+python3 tools/summarize_suite.py evidence/mesh-suite-local-2026-11-21.jsonl
+local-2026-11-21: 100 of 100 passed</code></pre>
+<p><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-currency-mesh-table-3.png"
+alt="Table: Prompt, Tool, job sent, Clouds, Passed, Turn median s" /></p>
+<p>Each agent call inside those turns, as timed by the agent's A2A
+server:</p>
+<p><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-currency-mesh-table-4.png"
+alt="Table: Cloud, Model, Calls, With A2UI, Agent median s, Agent max s" /></p>
+<p>The coordinator sent the expected job in all 100 turns:
+<code>rate</code> 30 times, <code>history</code> 20,
+<code>comparison</code> 20, <code>ask_all_clouds</code> 20 times, and no
+tool for the weather question.</p>
+<p>All 80 AWS and Azure calls returned A2UI. The Google Cloud agent
+returned A2UI in 48 of 50; the other two were the unknown currency code
+<code>XYZ</code>, where it answered in text, which the coordinator
+relayed. The <code>XYZ</code> prompt rendered an error card in the other
+8 runs and is the slowest prompt in the suite, a median of 27.3 s in the
+Google Cloud agent. Without it, the Google Cloud agent's median is 7.4 s
+over 40 calls.</p>
+<p>In the 20 ask-all turns, the three calls run in parallel and the
+Google Cloud agent was the slowest of the three every time. Those turns
+took a median of 10.2 and 10.6 s, the same as a rate question routed to
+Google Cloud alone.</p>
+<hr />
+<h4 id="step-7--cross-cloud-calls-with-no-stored-secret">Step 7 —
+Cross-Cloud Calls With No Stored Secret</h4>
+<p>Locally every peer is plain HTTP. Deployed, <code>mesh/auth.py</code>
+signs each leg from the coordinator's own Google identity on Cloud Run,
+so no cloud holds a key for another:</p>
+<p><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-currency-mesh-table-5.png"
+alt="Table: Leg, Credential, Enforced by" /></p>
+<p>Three scripts deploy it, service accounts first, because AWS and
+Azure trust the coordinator's identity:</p>
+<pre class="shell"><code>./infra/deploy_gcp.sh sa
+./infra/deploy_gcp.sh agent
+./infra/deploy_aws.sh deploy &amp;&amp; ./infra/deploy_aws.sh role &amp;&amp; ./infra/deploy_aws.sh env
+./infra/deploy_azure.sh deploy &amp;&amp; ./infra/deploy_azure.sh fic &amp;&amp; ./infra/deploy_azure.sh auth &amp;&amp; ./infra/deploy_azure.sh env
+./infra/deploy_gcp.sh coordinator
+./infra/deploy_gcp.sh ui</code></pre>
+<p><code>deploy_aws.sh</code> serves the Strands agent on AgentCore
+Runtime with protocol A2A, on port 9000 at the root path.
+<code>deploy_azure.sh verify</code> checks that an unauthenticated call
+to the Azure agent gets a 401. Each script tears its side down with
+<code>destroy</code>.</p>
+<hr />
+<h4 id="mag_right-tip-check-routing-by-the-job-the-model-sent">🔎 Tip:
+Check Routing by the Job the Model Sent</h4>
+<p>A card on screen tells you which agent answered, but a wrong job can
+still land on a plausible card: a trend question sent as
+<code>rate</code> gets a rate card. The suite reads the <code>job</code>
+argument from the coordinator's tool call in the AG-UI stream and
+compares it with the expected job, then checks which clouds
+answered.</p>
+<hr />
+<h4 id="mag_right-tip-carry-provenance-in-the-a2a-message">🔎 Tip: Carry
+Provenance in the A2A Message</h4>
+<p>The coordinator labels each answer from the A2A message metadata the
+agent sent: cloud, framework, model and seconds. The label in the UI is
+the agent's own claim about itself, read at the time of the answer, so a
+redeployed agent on a new model shows the new model with no change to
+the coordinator or the UI.</p>
+<hr />
+<h4
+id="mag_right-tip-serialise-an-agent-that-holds-conversation-state">🔎
+Tip: Serialise an Agent That Holds Conversation State</h4>
+<p>A Strands <code>Agent</code> keeps its conversation in
+<code>agent.messages</code>. Behind an A2A server that takes concurrent
+requests, two questions would share one conversation. A lock and
+<code>agent.messages.clear()</code> per request make each A2A call a
+single, separate turn. An <code>ask_all_clouds</code> call sends one
+request per agent, so the lock costs nothing there.</p>
+<hr />
+<h4 id="compare-and-contrast">Compare and Contrast</h4>
+<p><img src="https://raw.githubusercontent.com/xbill9/currency-mesh-agui-a2ui1/main/medium/img/devto-currency-mesh-table-6.png"
+alt="Table: Google Cloud, AWS, Azure" /></p>
+<hr />
+<h4 id="so-which-one">So, Which One?</h4>
+<p>Route by job when each cloud owns a different kind of answer. The
+coordinator makes one model call to pick the job, one agent answers, and
+the turn costs that agent's time plus the coordinator's.</p>
+<p>Ask all three when the point is the comparison: the same question,
+three frameworks and three models, side by side in one turn. The three
+calls run in parallel, so the turn waits for the slowest agent.</p>
+<p>Keep the job-to-cloud table in code either way. The model picks from
+three words it can be checked on, and the cloud behind each word is a
+deployment decision.</p>
+<hr />
+<h4 id="summary">Summary</h4>
+<p>The goal of this article was to join three A2UI 1.0 agents on three
+clouds into one chat. The key to the solution was a shared A2A server
+that sends each agent's validated A2UI as DataParts, and a coordinator
+that names a job while code picks the cloud. The results were:</p>
+<ul>
+<li>🟢 100 of 100 suite turns reached the right clouds with the job the
+question called for</li>
+<li>🟢 The AWS and Azure agents joined the mesh with two added lines
+each; their catalog, macros and reply-text rescue are unchanged</li>
+<li>🟢 One A2A server, <code>mesh/server.py</code>, serves ADK, Strands
+and Agent Framework agents and sends their A2UI as
+<code>application/a2ui+json</code> DataParts</li>
+<li>🟢 Three answers share one turn once the coordinator gives each
+surface a per-cloud id</li>
+<li>🟢 All 80 AWS and Azure calls returned A2UI, at medians of 0.9 s and
+1.6 s per call</li>
+<li>⚠️ The Google Cloud agent is the slowest leg, a median of 7.6 s, and
+sets the time of every ask-all turn</li>
+<li>⚠️ An unknown currency code took a median of 27.3 s on Google Cloud
+and answered in text in 2 of 10 runs</li>
+<li>❌ The Google Cloud agent needed 65 changed lines, because its
+single-cloud repository served A2A from inside
+<code>agent.py</code></li>
+</ul>
+<p>Scope: one run on 2026-11-21, all five processes on one Linux
+machine, ten runs per prompt. The agents called
+<code>gemini-3.8-flash</code> through the Gemini API,
+<code>us.amazon.nova-2-lite-v1:0</code> on Bedrock in us-east-1 and
+<code>gpt-5.4-mini</code> on Azure OpenAI in eastus2. Every peer was
+plain HTTP on the same machine, so the suite measures routing and
+rendering, and the timings exclude cross-cloud network and
+authentication. The deployed legs and their credentials in Step 7 come
+from the repository's deploy scripts and were not part of this run.
+Seconds are wall-clock times for one request at a time, with three
+different models, and describe the three deployments as built.</p>
+<p>The strategy for joining generative UI agents across Google Cloud,
+AWS and Azure was validated with an incremental step by step
+approach.</p>
+<hr />
+<h4 id="references">References</h4>
+<ul>
+<li>This mesh, its tests and evidence: <a
+href="https://github.com/xbill9/currency-mesh-agui-a2ui1">https://github.com/xbill9/currency-mesh-agui-a2ui1</a></li>
+<li>Google Cloud agent (ADK, Gemini): <a
+href="https://github.com/xbill9/currency-claude-agui-a2ui1">https://github.com/xbill9/currency-claude-agui-a2ui1</a></li>
+<li>AWS agent (Strands, Nova): <a
+href="https://github.com/xbill9/currency-strands-agui-a2ui1">https://github.com/xbill9/currency-strands-agui-a2ui1</a></li>
+<li>Azure agent (Agent Framework, Azure OpenAI): <a
+href="https://github.com/xbill9/currency-maf-agui-a2ui1">https://github.com/xbill9/currency-maf-agui-a2ui1</a></li>
+<li>Cross-cloud auth adapters: <a
+href="https://github.com/xbill9/multicloud-adk-a2a-currency">https://github.com/xbill9/multicloud-adk-a2a-currency</a></li>
+<li>What Changes With the A2UI 1.0 Release: <a
+href="https://dev.to/gde/what-changes-with-the-a2ui-10-release-31eo">https://dev.to/gde/what-changes-with-the-a2ui-10-release-31eo</a></li>
+<li>A2UI 1.0 on AWS: <a
+href="https://dev.to/aws-builders/a2ui-10-on-aws-a-strands-currency-agent-with-amazon-nova-agentcore-runtime-and-ecs-express-mode-2pgl">https://dev.to/aws-builders/a2ui-10-on-aws-a-strands-currency-agent-with-amazon-nova-agentcore-runtime-and-ecs-express-mode-2pgl</a></li>
+<li>A2UI 1.0 on Azure: <a
+href="https://dev.to/xbill/a2ui-10-on-azure-a-microsoft-agent-framework-currency-agent-with-azure-openai-and-container-apps-1lgj">https://dev.to/xbill/a2ui-10-on-azure-a-microsoft-agent-framework-currency-agent-with-azure-openai-and-container-apps-1lgj</a></li>
+<li>Strands to Strands over A2A on Bedrock AgentCore: <a
+href="https://dev.to/aws-builders/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-19hp">https://dev.to/aws-builders/strands-to-strands-over-a2a-on-bedrock-agentcore-with-iam-as-the-only-credential-19hp</a></li>
+<li>A2UI v1.0 specification: <a
+href="https://a2ui.org/specification/v1.0-a2ui/">https://a2ui.org/specification/v1.0-a2ui/</a></li>
+<li>A2A protocol: <a
+href="https://a2a-protocol.org">https://a2a-protocol.org</a></li>
+<li>AG-UI: <a
+href="https://docs.ag-ui.com">https://docs.ag-ui.com</a></li>
+<li>CopilotKit: <a
+href="https://github.com/CopilotKit/CopilotKit">https://github.com/CopilotKit/CopilotKit</a></li>
+<li>Google Agent Development Kit: <a
+href="https://github.com/google/adk-python">https://github.com/google/adk-python</a></li>
+<li>Strands Agents: <a
+href="https://strandsagents.com">https://strandsagents.com</a></li>
+<li>Microsoft Agent Framework: <a
+href="https://pypi.org/project/agent-framework/">https://pypi.org/project/agent-framework/</a></li>
+<li>Frankfurter API: <a
+href="https://www.frankfurter.dev">https://www.frankfurter.dev</a></li>
+</ul>
+</body>
+</html>
