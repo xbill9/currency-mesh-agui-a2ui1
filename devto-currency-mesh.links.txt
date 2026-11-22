@@ -1,6 +1,8 @@
 devto-gde = https://dev.to/gde/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure-2j83
 devto-aws = https://dev.to/aws-builders/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure-227e
-builder = PENDING
+builder = https://builder.aws.com/content/3MStL3LqQUZ2F2NuZZ45F2cy0h2/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure
 medium = SKIP
-substack = PENDING
+substack = https://xbill9.substack.com/p/one-chat-three-clouds-an-a2ui-10
 repo = https://github.com/xbill9/currency-mesh-agui-a2ui1
+linkedin-article = https://www.linkedin.com/pulse/one-chat-three-clouds-a2ui-10-agent-mesh-over-a2a-google-mclean-uicwc/
+linkedin = https://www.linkedin.com/feed/update/urn:li:activity:7530269314059386881/

@@ -1,0 +1,16 @@
+One Chat, Three Clouds: An A2UI 1.0 Agent Mesh Over A2A on Google Cloud, AWS and Azure
+
+Three A2UI 1.0 currency agents, one per cloud, joined over A2A behind one AG-UI coordinator. Google ADK and Gemini, Strands and Amazon Nova, Microsoft Agent Framework and Azure OpenAI answer in the same chat, one at a time or all three at once.
+
+What is in it:
+
+- 🟢 100 of 100 suite turns reached the right clouds with the job the question called for
+- 🟢 The AWS and Azure agents joined the mesh with two added lines each; their catalog, macros and reply-text rescue are unchanged
+- 🟢 One A2A server, mesh/server.py, serves ADK, Strands and Agent Framework agents and sends their A2UI as application/a2ui+json DataParts
+- 🟢 Three answers share one turn once the coordinator gives each surface a per-cloud id
+
+dev.to (Google Developer Experts): https://dev.to/gde/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure-2j83
+dev.to (AWS Community Builders): https://dev.to/aws-builders/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure-227e
+AWS Builder Center: https://builder.aws.com/content/3MStL3LqQUZ2F2NuZZ45F2cy0h2/one-chat-three-clouds-an-a2ui-10-agent-mesh-over-a2a-on-google-cloud-aws-and-azure
+Substack: https://xbill9.substack.com/p/one-chat-three-clouds-an-a2ui-10
+GitHub: https://github.com/xbill9/currency-mesh-agui-a2ui1

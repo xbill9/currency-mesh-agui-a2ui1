@@ -10,7 +10,7 @@ This article provides a step by step guide to a cross-cloud generative UI mesh. 
 
 https://github.com/xbill9/currency-mesh-agui-a2ui1
 
-**The three agents joined the mesh with two added lines each.** Each agent is the one from its single-cloud repository. One shared A2A server runs all three frameworks, and each agent's UI tool hands its validated A2UI to that server with one `record(wire)` call. The coordinator model names a job and a table in code picks the cloud. In a ten-prompt routing suite run ten times through the chat UI, **100 of 100 turns reached the right clouds with the right job**, and every agent call that should return A2UI did.
+**The AWS and Azure agents joined the mesh with two added lines each, and the Google Cloud agent with 65 changed lines.** Each agent is the one from its single-cloud repository. One shared A2A server runs all three frameworks, and each agent's UI tool hands its validated A2UI to that server with one `record(wire)` call. The coordinator model names a job and a table in code picks the cloud. In a ten-prompt routing suite run ten times through the chat UI, **100 of 100 turns reached the right clouds with the right job**, and every agent call that should return A2UI did.
 
 Demo video: https://www.youtube.com/watch?v=PtLc5apk8AU
 
